@@ -34,6 +34,21 @@ io.on('connection', function(socket){
 	socket.on('message', function(message){
 		console.log(message.text);
 		io.emit('message', message);
+		
+		var chat = new chatContent({
+			content: message.text,
+			author: message.author.name,
+			questID: message.author.questID
+		})
+
+		chat.save(function(err){
+			if(!err)
+				console.log("Chat Saved");
+			else
+				console.log("chat saving error: " + err);
+		});
+
+
 	});
 
 
