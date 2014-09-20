@@ -4,5 +4,16 @@
 	<li ng-repeat="message in messages track by $index">{{message.author.name}}: {{message.text}}</li>
 </div>
 <input type="text" ng-model="newMessage.text"></input>
-<button ng-click="sendNewMessage()">Send</button>
+<button ng-click="sendNewMessage()">Chat</button>
+<button ng-click="sendQuestion()">Ask</button>
 
+<div ng-repeat="question in questions track by $index">
+	<span>{{question.author.name}}: {{question.text}}</span>
+	<br />
+	<li ng-repeat="answer in question.answers">
+		{{answer.author.name}}: {{answer.text}}
+	</li>
+	<input type="text" ng-model="question.tempAnswer"></input>
+	<button ng-click="submitAnswer(question)">Answer</button>
+	<br />
+</div>

@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var AccountSchema = new mongoose.Schema({
-	questID: String,
+	questId: String,
 	name: String,
 	password: {type: String, default: "password"}
 });

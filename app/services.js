@@ -14,19 +14,19 @@ angular.module('myApp.services', ['ngCookies'])
                 "text": "Hello I'm in ECE!!!",
                 "author": {
                     "name": "Gleb",
-                    "questID": "gabillig"
+                    "questId": "gabillig"
                 }
             }, {
                 "text": "Hi",
                 "author": {
                     "name": "Acer",
-                    "questID": "c327wang"
+                    "questId": "c327wang"
                 }
             },{
                 "text": "Sup",
                 "author": {
                     "name": "Zack",
-                    "questID": "zwaterfield"
+                    "questId": "zwaterfield"
                 }
             }];
 
@@ -46,10 +46,75 @@ angular.module('myApp.services', ['ngCookies'])
 
         return new MessagesService();
     })
+    .factory('questionsService', function($rootScope, mySocket) {
+        var QuestionsService = function() {
+            mySocket.forward('message');
+
+            var questions = [{
+                "text": "Why am I still in ECE??!??!",
+                "author": {
+                    "name": "Gleb",
+                    "questId": "gabillig"
+                },
+                "answers": [{
+                    "text": "Quit crying",
+                    "author": {
+                        "name": "Acer",
+                        "questId": "c327wang"
+                    },
+                }, {
+                    "text": "Plz dont go",
+                    "author": {
+                        "name": "Sam Simpson",
+                        "questId": "ssimpsons"
+                    }
+                }]
+            }, {
+                "text": "What is Lin Alg?",
+                "author": {
+                    "name": "Acer",
+                    "questId": "c327wang"
+                },
+                "answers": []
+            },{
+                "text": "How do I even Assembly?",
+                "author": {
+                    "name": "Zack",
+                    "questId": "zwaterfield"
+                },
+                "answers": [{
+                    "text": "LOL DIDNT TAKE 222",
+                    "author": {
+                        "name": "Acer",
+                        "questId": "c327wang"
+                    },
+                }]
+            }];
+
+            this.getQuestions = function() {
+                return questions;
+            };
+
+            this.sendNewQuestion = function(newQuestion) {
+                mySocket.emit('question', newQuestion);
+            };
+
+            this.submitAnswer = function(newAnswer) {
+                mySocket.emit('answer', newAnswer);
+            }
+
+            $rootScope.$on('socket:question', function(ev, data) {
+                questions.push(data);
+            });
+
+        };
+
+        return new QuestionsService();
+    })
     .factory('userProfileService', function($http, $cookieStore, $location, $log) {
         var UserProfileService = function() {
             var userProfile = {
-                "questID": "",
+                "questId": "",
                 "name": "",
                 "password": ""
             }
@@ -78,47 +143,9 @@ angular.module('myApp.services', ['ngCookies'])
                     $location.path('/menu');
                 });
             };
-
-            this.updateNearest = function(maxNum, callback) {
-                $http.post('/api/getUser', {
-                    userId: userId
-                }).success(function(data) {
-                    $http.post('/api/getNearestEvents', {
-                        lat: data.lat,
-                        lon: data.lon,
-                        max: maxNum || 10
-                    }).success(function(data) {
-                        callback(data);
-                    });
-                });
-            };
-
-            this.loadUserMeetup = function(callback) {
-                var userId = $cookieStore.get('userID')
-                $http.post('/api/getSubscriptions', {
-                    userId: userId,
-                }).success(function(data) {
-                    callback(data);
-                });
-            };
         };
 
         return new UserProfileService();
-    })
-
-    .factory('eventService', function() {
-        var EventService = function() {
-            var currentEvent = {};
-
-            this.setCurrentEvent = function(eventData) {
-                currentEvent = eventData;
-            };
-
-            this.getCurrentEvent = function() {
-                return currentEvent;
-            }
-        };
-        return new EventService();
     })
     .factory('mySocket', function(socketFactory) {
         return socketFactory();

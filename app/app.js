@@ -35,10 +35,11 @@ io.on('connection', function(socket){
 		console.log(message.text);
 		io.emit('message', message);
 		
-		var chat = new chatModel({
-			text: message.text,
-			author: message.author,
-		})
+		var chat = new chatContent({
+			content: message.text,
+			author: message.author.name,
+			questId: message.author.questId
+		});
 
 		chat.save(function(err){
 			if(!err)
