@@ -76,7 +76,7 @@ io.on('connection', function(socket){
 	socket.on('answer', function(answer){
 		console.log(answer.text);
 		io.emit('answer', answer);
-
+		
 		//questionModel.findbyID(answer.questionId).exec(function(err, question){
 			
 		//});

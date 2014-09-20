@@ -111,7 +111,7 @@ angular.module('myApp.services', ['btford.socket-io'])
 
             $rootScope.$on('socket:answer', function(ev, data) {
                 angular.forEach(questions, function(question) {
-                    if (question.id === data.questionId) {
+                    if (question._id === data.questionId) {
                         question.answers.push(data);
                     }
                 });

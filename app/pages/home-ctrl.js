@@ -35,7 +35,7 @@ angular.module('myApp.controllers').controller('HomeCtrl',
                 "text": question.tempAnswer,
                 "author": $scope.userProfile,
                 "timestamp": Date.now(),
-                "questionId": question.id || 0
+                "questionId": question._id || 0
             };
 
             questionsService.submitAnswer(angular.copy(answer));
