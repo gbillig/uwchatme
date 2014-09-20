@@ -46,6 +46,68 @@ angular.module('myApp.services', ['ngCookies'])
 
         return new MessagesService();
     })
+    .factory('questionsService', function($rootScope, mySocket) {
+        var QuestionsService = function() {
+            mySocket.forward('message');
+
+            var questions = [{
+                "text": "Why am I still in ECE??!??!",
+                "author": {
+                    "name": "Gleb",
+                    "questID": "gabillig"
+                },
+                "answers": [{
+                    "text": "Quit crying",
+                    "author": {
+                        "name": "Acer",
+                        "questID": "c327wang"
+                    },
+                }, {
+                    "text": "Plz dont go",
+                    "author": {
+                        "name": "Sam Simpson",
+                        "questID": "ssimpsons"
+                    }
+                }]
+            }, {
+                "text": "What is Lin Alg?",
+                "author": {
+                    "name": "Acer",
+                    "questID": "c327wang"
+                },
+                "answers": []
+            },{
+                "text": "How do I even Assembly?",
+                "author": {
+                    "name": "Zack",
+                    "questID": "zwaterfield"
+                },
+                "answers": [{
+                    "text": "LOL DIDNT TAKE 222",
+                    "author": {
+                        "name": "Acer",
+                        "questID": "c327wang"
+                    },
+                }]
+            }];
+
+            this.getQuestions = function() {
+                return questions;
+            };
+
+            this.sendNewQuestion = function(newQuestion) {
+                questions.push(newQuestion);
+                mySocket.emit('question', newQuestion);
+            };
+
+            $rootScope.$on('socket:question', function(ev, data) {
+                questions.push(data);
+            });
+
+        };
+
+        return new QuestionsService();
+    })
     .factory('userProfileService', function($http, $cookieStore, $location, $log) {
         var UserProfileService = function() {
             var userProfile = {

@@ -1,19 +1,32 @@
 'use strict';
 
 angular.module('myApp.controllers').controller('HomeCtrl',
-    function($http, $scope, $location, messagesService, userProfileService) {
+    function($http, $scope, $location, messagesService, questionsService, userProfileService) {
 
-        $scope.messages = messagesService.getMessages();
         $scope.userProfile = userProfileService.getUserProfile();
+        $scope.messages = messagesService.getMessages();
+        $scope.questions = questionsService.getQuestions();
 
         $scope.newMessage = {
             "text": "",
             "author": $scope.userProfile,
         };
 
+        $scope.newQuestion = {
+            "text": "",
+            "author": $scope.userProfile,
+        };
+
         $scope.sendNewMessage = function() {
-            $scope.newMessage.timestamp = new Date().toString();
+            $scope.newMessage.timestamp = Date.now();
             messagesService.sendNewMessage(angular.copy($scope.newMessage));
+            $scope.newMessage.text = "";
+        };
+
+        $scope.sendQuestion = function() {
+            $scope.newQuestion.text = $scope.newMessage.text;
+            $scope.newQuestion.timestamp = Date.now();
+            questionsService.sendNewQuestion(angular.copy($scope.newQuestion));
             $scope.newMessage.text = "";
         };
 
