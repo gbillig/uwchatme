@@ -24,6 +24,7 @@ app.use('/socket.io', express.static(__dirname + '/socket.io'));
 app.use('/', express.static(__dirname));
 
 require('./routes')(app);
+require('./models/chat');
 
 
 io.on('connection', function(socket){
@@ -32,6 +33,8 @@ io.on('connection', function(socket){
 
 	socket.on('message', function(message){
 		console.log(message.text);
-		io.broadcast.emit('message', message);
+		io.emit('message', message);
 	});
+
+
 });
