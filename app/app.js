@@ -27,7 +27,11 @@ require('./routes')(app);
 
 
 io.on('connection', function(socket){
+
+	console.log("Connection is made: " + socket.id);
+
 	socket.on('message', function(message){
 		console.log(message.text);
+		socket.broadcast.emit('message', message);
 	});
 });

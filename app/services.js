@@ -35,7 +35,7 @@ angular.module('myApp.services', ['ngCookies'])
 
             this.sendNewMessage = function(newMessage) {
                 messages.push(newMessage);
-                // mySocket.emit('message', newMessage);
+                mySocket.emit('message', newMessage);
             };
 
         };

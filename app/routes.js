@@ -12,6 +12,7 @@ module.exports = function(app) {
 		//var parsedJson = JSON.parse(req);
 		console.log(req.body);
 		res.json({ message: 'User Created!!!!' });
+		//Verify that account has not been already created
 		var user = new accountModel(req.body);
 		user.save(function(err){
 			if(!err)
@@ -21,5 +22,8 @@ module.exports = function(app) {
 		});
 
 	});
+
+	//login API
+	//QnA API
 
 };
