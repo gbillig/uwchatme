@@ -73,9 +73,9 @@ io.on('connection', function(socket){
 		console.log(answer.text);
 		io.emit('answer', answer);
 
-		questionModel.findbyID(answer.questionId).exec(function(err, question){
+		// questionModel.findbyID(answer.questionId).exec(function(err, question){
 			
-		});
+		// });
 
 
 	});
