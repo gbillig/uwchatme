@@ -56,12 +56,16 @@ io.on('connection', function(socket){
 		var question = new questionModel({
 			text: question.text,
 			author: question.author
+
 		});
 
 		question.save(function(err, savedQ){
 			if(!err) {
 				console.log("Question Saved");
+				console.log(savedQ);
 				question.id = savedQ.id;
+				question.answer = [];
+				console.log(JSON.stringify(question));
 				io.emit('question', question);
 			} else {
 				console.log("question saving error: " + err);
