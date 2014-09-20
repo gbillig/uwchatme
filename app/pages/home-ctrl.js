@@ -30,6 +30,17 @@ angular.module('myApp.controllers').controller('HomeCtrl',
             $scope.newMessage.text = "";
         };
 
+        $scope.submitAnswer = function(question) {
+            var answer = {
+                "text": question.tempAnswer,
+                "author": $scope.userProfile,
+                "timestamp": Date.now(),
+                "questionId": question.id || 0
+            };
+
+            questionsService.submitAnswer(angular.copy(answer));
+        };
+
 
 
         $scope.isCreate = true;

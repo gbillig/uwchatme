@@ -13,6 +13,7 @@
 	<li ng-repeat="answer in question.answers">
 		{{answer.author.name}}: {{answer.text}}
 	</li>
-	<input type="text" ng-model="question.tempAnswer" ng-click="submitAnswer(question)"></input>
+	<input type="text" ng-model="question.tempAnswer"></input>
+	<button ng-click="submitAnswer(question)">Answer</button>
 	<br />
 </div>

@@ -38,7 +38,7 @@ io.on('connection', function(socket){
 		var chat = new chatContent({
 			content: message.text,
 			author: message.author.name,
-			questID: message.author.questID
+			questId: message.author.questId
 		})
 
 		chat.save(function(err){

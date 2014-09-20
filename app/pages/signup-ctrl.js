@@ -4,7 +4,7 @@ angular.module('myApp.controllers').controller('SignupCtrl',
     function($http, $scope, $location, userProfileService) {
 
         $scope.userProfile = {
-            "questID": "",
+            "questId": "",
             "name": "",
             "password": ""
         };

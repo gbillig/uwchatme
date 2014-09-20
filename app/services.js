@@ -14,19 +14,19 @@ angular.module('myApp.services', ['ngCookies'])
                 "text": "Hello I'm in ECE!!!",
                 "author": {
                     "name": "Gleb",
-                    "questID": "gabillig"
+                    "questId": "gabillig"
                 }
             }, {
                 "text": "Hi",
                 "author": {
                     "name": "Acer",
-                    "questID": "c327wang"
+                    "questId": "c327wang"
                 }
             },{
                 "text": "Sup",
                 "author": {
                     "name": "Zack",
-                    "questID": "zwaterfield"
+                    "questId": "zwaterfield"
                 }
             }];
 
@@ -54,39 +54,39 @@ angular.module('myApp.services', ['ngCookies'])
                 "text": "Why am I still in ECE??!??!",
                 "author": {
                     "name": "Gleb",
-                    "questID": "gabillig"
+                    "questId": "gabillig"
                 },
                 "answers": [{
                     "text": "Quit crying",
                     "author": {
                         "name": "Acer",
-                        "questID": "c327wang"
+                        "questId": "c327wang"
                     },
                 }, {
                     "text": "Plz dont go",
                     "author": {
                         "name": "Sam Simpson",
-                        "questID": "ssimpsons"
+                        "questId": "ssimpsons"
                     }
                 }]
             }, {
                 "text": "What is Lin Alg?",
                 "author": {
                     "name": "Acer",
-                    "questID": "c327wang"
+                    "questId": "c327wang"
                 },
                 "answers": []
             },{
                 "text": "How do I even Assembly?",
                 "author": {
                     "name": "Zack",
-                    "questID": "zwaterfield"
+                    "questId": "zwaterfield"
                 },
                 "answers": [{
                     "text": "LOL DIDNT TAKE 222",
                     "author": {
                         "name": "Acer",
-                        "questID": "c327wang"
+                        "questId": "c327wang"
                     },
                 }]
             }];
@@ -96,9 +96,12 @@ angular.module('myApp.services', ['ngCookies'])
             };
 
             this.sendNewQuestion = function(newQuestion) {
-                questions.push(newQuestion);
                 mySocket.emit('question', newQuestion);
             };
+
+            this.submitAnswer = function(newAnswer) {
+                mySocket.emit('answer', newAnswer);
+            }
 
             $rootScope.$on('socket:question', function(ev, data) {
                 questions.push(data);
@@ -111,7 +114,7 @@ angular.module('myApp.services', ['ngCookies'])
     .factory('userProfileService', function($http, $cookieStore, $location, $log) {
         var UserProfileService = function() {
             var userProfile = {
-                "questID": "",
+                "questId": "",
                 "name": "",
                 "password": ""
             }
@@ -140,47 +143,9 @@ angular.module('myApp.services', ['ngCookies'])
                     $location.path('/menu');
                 });
             };
-
-            this.updateNearest = function(maxNum, callback) {
-                $http.post('/api/getUser', {
-                    userId: userId
-                }).success(function(data) {
-                    $http.post('/api/getNearestEvents', {
-                        lat: data.lat,
-                        lon: data.lon,
-                        max: maxNum || 10
-                    }).success(function(data) {
-                        callback(data);
-                    });
-                });
-            };
-
-            this.loadUserMeetup = function(callback) {
-                var userId = $cookieStore.get('userID')
-                $http.post('/api/getSubscriptions', {
-                    userId: userId,
-                }).success(function(data) {
-                    callback(data);
-                });
-            };
         };
 
         return new UserProfileService();
-    })
-
-    .factory('eventService', function() {
-        var EventService = function() {
-            var currentEvent = {};
-
-            this.setCurrentEvent = function(eventData) {
-                currentEvent = eventData;
-            };
-
-            this.getCurrentEvent = function() {
-                return currentEvent;
-            }
-        };
-        return new EventService();
     })
     .factory('mySocket', function(socketFactory) {
         return socketFactory();
