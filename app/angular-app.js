@@ -10,16 +10,18 @@ angular.module('myApp', [
     'myApp.services',
     'myApp.controllers',
     'myApp.directives',
-])
-    .config(function($routeProvider, $locationProvider) {
+    ])
+    .config(function($routeProvider) {
         $routeProvider
         .when('/home', {
-            templateUrl: 'pages/home',
+            templateUrl: 'pages/home.html',
             controller: 'HomeCtrl'
+        })
+        .when('/register', {
+            templateUrl: 'pages/register.html'.
+            controller: 'RegCtrl'
         })
         .otherwise({
             redirectTo: '/home'
         });
-
-        $locationProvider.html5Mode(true);
     });
