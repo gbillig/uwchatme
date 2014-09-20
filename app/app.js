@@ -35,7 +35,7 @@ io.on('connection', function(socket){
 		console.log(message.text);
 		io.emit('message', message);
 		
-		var chat = new chatContent({
+		var chat = new chatModel({
 			content: message.text,
 			author: message.author.name,
 			questId: message.author.questId
@@ -59,12 +59,13 @@ io.on('connection', function(socket){
 		});
 
 		question.save(function(err, savedQ){
-			if(!err)
+			if(!err) {
 				console.log("Question Saved");
-				question.questionId = savedQ.id;
+				question.id = savedQ.id;
 				io.emit('question', question);
-			else
+			} else {
 				console.log("question saving error: " + err);
+			}
 		});
 	});
 
