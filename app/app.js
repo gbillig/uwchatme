@@ -32,6 +32,6 @@ io.on('connection', function(socket){
 
 	socket.on('message', function(message){
 		console.log(message.text);
-		socket.broadcast.emit('message', message);
+		io.broadcast.emit('message', message);
 	});
 });

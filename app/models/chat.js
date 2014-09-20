@@ -2,8 +2,9 @@ var mongoose = require('mongoose');
 
 var ChatSchema = new mongoose.Schema({
 	content: String,
+	author: 
 	course: Number, //Shoud think about this
 	timestamp: {type: Date, default: Date.now}
 });
 
-mongoose.model("Chat", ChatSchema);
+export.module = chatContent = mongoose.model("Chat", ChatSchema);
