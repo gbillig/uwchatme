@@ -6,7 +6,7 @@
 // Demonstrate how to register services
 // In this case it is a simple value service.
 angular.module('myApp.services', ['ngCookies'])
-    .factory('messagesService', function() {
+    .factory('messagesService', function(mySocket) {
         var MessagesService = function() {
 
             var messages = [{
@@ -31,6 +31,11 @@ angular.module('myApp.services', ['ngCookies'])
 
             this.getMessages = function() {
                 return messages;
+            };
+
+            this.sendNewMessage = function(newMessage) {
+                messages.push(newMessage);
+                // mySocket.emit('message', newMessage);
             };
 
         };

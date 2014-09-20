@@ -1,5 +1,8 @@
 <h1>UW Chat Me</h1>
 
 <div>
-	<li ng-repeat="message in messages">{{message.author.name}}: {{message.text}}</li>
+	<li ng-repeat="message in messages track by $index">{{message.author.name}}: {{message.text}}</li>
 </div>
+<input type="text" ng-model="newMessage.text"></input>
+<button ng-click="sendNewMessage()">Send</button>
+

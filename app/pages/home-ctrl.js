@@ -1,18 +1,23 @@
 'use strict';
 
 angular.module('myApp.controllers').controller('HomeCtrl',
-    function($http, $scope, $location, messagesService, mySocket) {
+    function($http, $scope, $location, messagesService, userProfileService) {
 
         $scope.messages = messagesService.getMessages();
-
-
-
-
         $scope.userProfile = userProfileService.getUserProfile();
 
-        $scope.submitName = function() {
-            userProfileService.createUser($scope.userProfile);
+        $scope.newMessage = {
+            "text": "",
+            "author": $scope.userProfile,
         };
+
+        $scope.sendNewMessage = function() {
+            $scope.newMessage.timestamp = new Date().toString();
+            messagesService.sendNewMessage(angular.copy($scope.newMessage));
+            $scope.newMessage.text = "";
+        };
+
+
 
         $scope.isCreate = true;
         $scope.opened = false;
