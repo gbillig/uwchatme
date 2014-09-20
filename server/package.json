@@ -1,0 +1,12 @@
+{
+  "name": "UWChat",
+  "description": "Chatroom for your class... realtime!",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": { "start": "nodemon app.js" } },
+  "dependencies": {
+    "express": "*",
+    "socket.io" : "*",
+    "mongoose" : "*"
+  }
+}
