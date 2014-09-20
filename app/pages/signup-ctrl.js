@@ -12,4 +12,4 @@ angular.module('myApp.controllers').controller('SignupCtrl',
         $scope.submitName = function() {
             userProfileService.createUser($scope.userProfile);
         };
-    }));
+    });
