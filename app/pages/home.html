@@ -1,2 +1,15 @@
-<span>HELLO</span>
-<div ng-repeat="sport in sportList">{{sport}}</div>
+<h1>UW Chat Me</h1>
+
+<span>Enter your name</span>
+<input type="text" ng-model="userProfile.name"></input>
+<br />
+
+<span>Enter your quest ID</span>
+<input type="text" ng-model="userProfile.questID"></input>
+<br />
+
+<span>Enter your password</span>
+<input type="text" ng-model="userProfile.password"></input>
+<br />
+
+<button ng-click="submitName()">Submit</button>

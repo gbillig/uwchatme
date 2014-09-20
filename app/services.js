@@ -52,14 +52,13 @@ angular.module('myApp.services', ['ngCookies'])
 
         return new SportsDataService();
     })
-    .factory('userProfileService', function($http, $cookieStore, $location) {
+    .factory('userProfileService', function($http, $cookieStore, $location, $log) {
         var UserProfileService = function() {
             var userProfile = {
-                "name": "defaultName",
-                "postalCode": "defaultPostalCode",
+                "questID": "",
+                "name": "",
+                "password": ""
             }
-
-            var userId = null;
 
             this.setUserProfile = function(newUserProfile) {
                 userProfile = newUserProfile;
@@ -69,9 +68,13 @@ angular.module('myApp.services', ['ngCookies'])
                 return userProfile;
             };
 
-            this.getUserId = function() {
-                return userId;
+            this.createUser = function(newUserProfile) {
+                this.setUserProfile(newUserProfile);
+                $http.post('/api/createUser', userProfile).success(function(data) {
+                    $log.debug(data);
+                });
             };
+
 
             this.userSignIn = function(profileJSON) {
                 $http.post('/api/createUser', profileJSON).success(function(data) {

@@ -18,7 +18,7 @@ angular.module('myApp', [
             controller: 'HomeCtrl'
         })
         .when('/register', {
-            templateUrl: 'pages/register.html'.
+            templateUrl: 'pages/register.html',
             controller: 'RegCtrl'
         })
         .otherwise({

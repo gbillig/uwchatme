@@ -3,6 +3,16 @@
 angular.module('myApp.controllers').controller('HomeCtrl',
     function($http, $scope, $location, userProfileService, sportsDataService) {
 
+        $scope.userProfile = {
+            "questID": "",
+            "name": "",
+            "password": ""
+        };
+
+        $scope.submitName = function() {
+            userProfileService.createUser($scope.userProfile);
+        };
+
         $scope.isCreate = true;
         $scope.opened = false;
         $scope.sportList = sportsDataService.getSportsList();
