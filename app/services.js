@@ -6,8 +6,9 @@
 // Demonstrate how to register services
 // In this case it is a simple value service.
 angular.module('myApp.services', ['ngCookies'])
-    .factory('messagesService', function(mySocket) {
+    .factory('messagesService', function($rootScope, mySocket) {
         var MessagesService = function() {
+            mySocket.forward('message');
 
             var messages = [{
                 "text": "Hello I'm in ECE!!!",
@@ -34,9 +35,12 @@ angular.module('myApp.services', ['ngCookies'])
             };
 
             this.sendNewMessage = function(newMessage) {
-                messages.push(newMessage);
                 mySocket.emit('message', newMessage);
             };
+
+            $rootScope.$on('socket:message', function(ev, data) {
+                messages.push(data);
+            });
 
         };
 
