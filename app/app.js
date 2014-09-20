@@ -4,7 +4,6 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
-var fs = require('fs');
 
 //Binding port number
 var port = process.env.PORT || 9999;
@@ -21,6 +20,14 @@ app.use(bodyParser.json()); // parse application/json
 app.use(bodyParser.urlencoded({ extended: true })); // parse application/x-www-form-urlencoded
 app.use('/pages', express.static(__dirname + '/pages')); // set the static files location /public/img will be /img for users
 app.use('/thirdparty', express.static(__dirname + '/thirdparty')); // set the static files location /public/img will be /img for users
+app.use('/socket.io', express.static(__dirname + '/socket.io'));
 app.use('/', express.static(__dirname));
 
 require('./routes')(app);
+
+
+io.on('connection', function(socket){
+	socket.on('message', function(message){
+		console.log(message.text);
+	});
+});

@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
 
-var AccountSchema = new mongoose.Scema({
+var AccountSchema = new mongoose.Schema({
 	questID: String,
 	name: String,
 	password: {type: String, default: "password"}
 });
 
-mongoose.model("Account", AccountSchema);
+module.export = accountModel = mongoose.model("Account", AccountSchema);
