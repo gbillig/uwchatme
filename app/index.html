@@ -1,0 +1,29 @@
+<html ng-app="myApp">
+<head>
+	<title>UW Chat Me</title>
+</head>
+<body ng-controller="MainCtrl">
+
+	<script src="thirdparty/angular.js"></script>
+	<script src="thirdparty/angular-route.js"></script>
+	<script src="thirdparty/angular-animate.js"></script>
+	<script src="thirdparty/angular-cookies.js"></script>
+
+	<script src="angular-app.js"></script>
+	<script src="services.js"></script>
+
+	<script src="pages/main-ctrl.js"></script>
+	<script src="pages/home-ctrl.js"></script>
+
+	<script src="filters.js"></script>
+	<script src="directives.js"></script>
+
+	<script src="thirdparty/socket.io.js"></script>
+	<script src="thirdparty/socket.js"></script>
+ 
+	<span>Enter your name: </span>
+	<input type="text" ng-model="name"></input>
+	<br>
+	<span>Your name is {{name}}</span>
+</body>
+</html>
