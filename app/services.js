@@ -62,6 +62,7 @@ angular.module('myApp.services', ['ngCookies'])
                 this.setUserProfile(newUserProfile);
                 $http.post('/api/createUser', userProfile).success(function(data) {
                     $log.debug(data);
+                    $location.path('/home');
                 });
             };
 
