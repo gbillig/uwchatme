@@ -25,7 +25,7 @@ app.use('/', express.static(__dirname));
 
 require('./routes')(app);
 require('./models/chat');
-
+require('./models/question');
 
 io.on('connection', function(socket){
 
@@ -35,10 +35,9 @@ io.on('connection', function(socket){
 		console.log(message.text);
 		io.emit('message', message);
 		
-		var chat = new chatContent({
-			content: message.text,
-			author: message.author.name,
-			questID: message.author.questID
+		var chat = new chatModel({
+			text: message.text,
+			author: message.author,
 		})
 
 		chat.save(function(err){
@@ -47,9 +46,35 @@ io.on('connection', function(socket){
 			else
 				console.log("chat saving error: " + err);
 		});
+	});
+
+	socket.on('question', function(question){
+		console.log(question.text);
+		
+
+		var question = new questionModel({
+			text: question.text,
+			author: question.author
+		});
+
+		question.save(function(err, savedQ){
+			if(!err)
+				console.log("Question Saved");
+				question.questionId = savedQ.id;
+				io.emit('question', question);
+			else
+				console.log("question saving error: " + err);
+		});
+	});
+
+	socket.on('answer', function(answer){
+		console.log(answer.text);
+		io.emit('answer', answer);
+
+		questionModel.findbyID(answer.questionId).exec(function(err, question){
+			
+		});
 
 
 	});
-
-
 });

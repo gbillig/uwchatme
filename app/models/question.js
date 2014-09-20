@@ -1,9 +1,10 @@
 var mongoose = require('mongoose');
 
 var QuestionSchema = new mongoose.Schema({
-	question: String,
+	text: String,
+	author: mongoose.Schema.Types.Mixed,
 	timestamp: {type: Date, default: Date.now},
-	subject: Number
+	answer: mongoose.Schema.Types.Mixed
 });
 
-mongoose.model('Question', QuestionSchema);
+module.export = questionModel = mongoose.model('Question', QuestionSchema);

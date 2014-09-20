@@ -24,6 +24,6 @@ module.exports = function(app) {
 	});
 
 	//login API
-	//QnA API
+	//QnA API for searching archive only
 
 };
