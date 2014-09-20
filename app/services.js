@@ -6,51 +6,36 @@
 // Demonstrate how to register services
 // In this case it is a simple value service.
 angular.module('myApp.services', ['ngCookies'])
-    .factory('sportsDataService', function() {
-        var SportsDataService = function() {
+    .factory('messagesService', function() {
+        var MessagesService = function() {
 
-            var sportsList = [{
-                "id": 0,
-                "name": "Soccer"
+            var messages = [{
+                "text": "Hello I'm in ECE!!!",
+                "author": {
+                    "name": "Gleb",
+                    "questID": "gabillig"
+                }
             }, {
-                "id": 1,
-                "name": "Basketball"
-            }, {
-                "id": 2,
-                "name": "Ultimate Frisbee"
-            }, {
-                "id": 3,
-                "name": "Rugby"
-            }, {
-                "id": 4,
-                "name": "American Football"
-            }, {
-                "id": 5,
-                "name": "Volleyball"
-            }, {
-                "id": 6,
-                "name": "Baseball"
-            }, {
-                "id": 7,
-                "name": "Running"
-            }, {
-                "id": 8,
-                "name": "Badminton"
-            }, {
-                "id": 9,
-                "name": "Tennis"
-            }, {
-                "id": 10,
-                "name": "Other..."
+                "text": "Hi",
+                "author": {
+                    "name": "Acer",
+                    "questID": "c327wang"
+                }
+            },{
+                "text": "Sup",
+                "author": {
+                    "name": "Zack",
+                    "questID": "zwaterfield"
+                }
             }];
 
-            this.getSportsList = function() {
-                return sportsList;
+            this.getMessages = function() {
+                return messages;
             };
 
         };
 
-        return new SportsDataService();
+        return new MessagesService();
     })
     .factory('userProfileService', function($http, $cookieStore, $location, $log) {
         var UserProfileService = function() {

@@ -1,13 +1,14 @@
 'use strict';
 
 angular.module('myApp.controllers').controller('HomeCtrl',
-    function($http, $scope, $location, userProfileService, sportsDataService) {
+    function($http, $scope, $location, messagesService, mySocket) {
 
-        $scope.userProfile = {
-            "questID": "",
-            "name": "",
-            "password": ""
-        };
+        $scope.messages = messagesService.getMessages();
+
+
+
+
+        $scope.userProfile = userProfileService.getUserProfile();
 
         $scope.submitName = function() {
             userProfileService.createUser($scope.userProfile);
@@ -15,7 +16,6 @@ angular.module('myApp.controllers').controller('HomeCtrl',
 
         $scope.isCreate = true;
         $scope.opened = false;
-        $scope.sportList = sportsDataService.getSportsList();
         $scope.startTime = new Date().setHours(13, 0);
         $scope.endTime = new Date().setHours(16, 0);
         $scope.td = new Date();

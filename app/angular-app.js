@@ -17,11 +17,11 @@ angular.module('myApp', [
             templateUrl: 'pages/home.html',
             controller: 'HomeCtrl'
         })
-        .when('/register', {
-            templateUrl: 'pages/register.html',
-            controller: 'RegCtrl'
+        .when('/signup', {
+            templateUrl: 'pages/signup.html',
+            controller: 'SignupCtrl'
         })
         .otherwise({
-            redirectTo: '/home'
+            redirectTo: '/signup'
         });
     });
