@@ -5,7 +5,7 @@
 
 // Demonstrate how to register services
 // In this case it is a simple value service.
-angular.module('myApp.services', ['ngCookies'])
+angular.module('myApp.services', ['btford.socket-io'])
     .factory('messagesService', function($rootScope, mySocket) {
         var MessagesService = function() {
             mySocket.forward('message');
@@ -48,7 +48,9 @@ angular.module('myApp.services', ['ngCookies'])
     })
     .factory('questionsService', function($rootScope, mySocket) {
         var QuestionsService = function() {
-            mySocket.forward('message');
+            mySocket.forward('question');
+            mySocket.forward('answer');
+
 
             var questions = [{
                 "text": "Why am I still in ECE??!??!",
@@ -99,12 +101,20 @@ angular.module('myApp.services', ['ngCookies'])
                 mySocket.emit('question', newQuestion);
             };
 
+            $rootScope.$on('socket:question', function(ev, data) {
+                questions.push(data);
+            });
+
             this.submitAnswer = function(newAnswer) {
                 mySocket.emit('answer', newAnswer);
             }
 
-            $rootScope.$on('socket:question', function(ev, data) {
-                questions.push(data);
+            $rootScope.$on('socket:answer', function(ev, data) {
+                angular.forEach(questions, function(question) {
+                    if (question.id === data.questionId) {
+                        question.answers.push(data);
+                    }
+                });
             });
 
         };
