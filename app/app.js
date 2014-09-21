@@ -82,7 +82,7 @@ io.on('connection', function(socket){
 			text: question.text,
 			id: "question_" + result.question.length,
 			author: question.author,
-			answer: []
+			answers: []
 			};
 
 			roomModel.findOneAndUpdate({name: socket.rooms[1]}, {$push: { question : newquestion }}, {}, function(err, room){
