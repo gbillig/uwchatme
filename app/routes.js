@@ -43,19 +43,23 @@ module.exports = function(app) {
 
 	//login API
 	app.post('api/login', function(req, res){
-		userModel.findOne({ questId: req.body.questId}, questId, function(err, result){
+		userModel.findOne({ questId: req.body.questId}, function(err, result){
 			if(!err){
 				if (!result){
-					if (req.body.questId == result.questId){
+					if (req.body.questId == result.questId && req.body.password == result.password){
 						//Check if one has class
 						//Wait for Gleb
+						var publicInfo = req.body;
+						delete publicInfo.password;
 						res.writeHead(200, {"Content-Type": "text/plain"});
-						res.json({ message: "sucess"});
+						res.json(publicInfo));
 					} else {
 						res.write(401, {"Content-Type": "text/plain"});
 						res.json( { message: "login failed"});
 					}				
 				}
+			} else {
+				console.log(err);
 			}
 
 		});
