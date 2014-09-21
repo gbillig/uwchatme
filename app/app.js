@@ -49,7 +49,7 @@ io.on('connection', function(socket){
 		//query room, get room.history
 		roomModel.findOneAndUpdate({name: socket.rooms[1]}, {$push: { history : chat }}, {}, function(err, room){
 			console.log("The room: " + room);
-			io.emit('smessage', message);
+			io.emit('message', message);
 		});
 
 	});
@@ -88,9 +88,10 @@ io.on('connection', function(socket){
 
 	});
 
+
 	socket.on('answer', function(answer){
 		console.log(answer);
 		io.emit('answer', answer);
-		//questionModel.findByID(answer.questionId, function(err, ));
+		
 	});
 });
