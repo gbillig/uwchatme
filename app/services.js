@@ -163,11 +163,11 @@ angular.module('myApp.services', ['btford.socket-io'])
                 "password": ""
             }
 
-            this.setUserProfile = function(newUserProfile) {
+            var setUserProfile = function(newUserProfile) {
                 userProfile = newUserProfile;
             };
 
-            var getUserProfile = function() {
+            this.getUserProfile = function() {
                 return userProfile;
             };
 
