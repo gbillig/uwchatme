@@ -77,7 +77,7 @@ io.on('connection', function(socket){
 		console.log(question.text);
 
 		roomModel.findOne({name: socket.rooms[1]}, 'question', function(err, result){
-			
+
 			var newquestion = {
 			text: question.text,
 			id: "question_" + result.question.length,
@@ -86,7 +86,7 @@ io.on('connection', function(socket){
 			};
 
 			roomModel.findOneAndUpdate({name: socket.rooms[1]}, {$push: { question : newquestion }}, {}, function(err, room){
-				io.emit('question', question);
+				io.emit('question', newquestion);
 			});
 		});
 	});
