@@ -167,25 +167,25 @@ angular.module('myApp.services', ['btford.socket-io'])
                 userProfile = newUserProfile;
             };
 
-            this.getUserProfile = function() {
+            var getUserProfile = function() {
                 return userProfile;
             };
 
             this.createUser = function(newUserProfile) {
                 // newUserProfile.iCal = iCal;
                 $http.post('/api/createUser', newUserProfile).success(function(data) {
-                    this.setUserProfile(data);
+                    setUserProfile(data);
                     $location.path('/home');
                 });
-            }.bind(this);
+            });
 
             this.login = function(userProfile, ical) {
                 $log.debug(ical);
                 $http.post('/api/login', userProfile).success(function(data) {
-                    this.setUserProfile(data);
+                    setUserProfile(data);
                     $location.path('/home');
                 });
-            }.bind(this);
+            });
         };
 
         return new UserProfileService();
