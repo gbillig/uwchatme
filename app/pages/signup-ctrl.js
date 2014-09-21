@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myApp.controllers').controller('SignupCtrl',
-    function($http, $scope, $location, userProfileService) {
+    function($http, $scope, $location, $log, userProfileService) {
 
         $scope.email = "";
 
