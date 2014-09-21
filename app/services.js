@@ -8,7 +8,29 @@
 angular.module('myApp.services', ['btford.socket-io'])
     .factory('messagesService', function($rootScope, mySocket) {
         var MessagesService = function() {
+            mySocket.forward('smessage');
             mySocket.forward('message');
+
+
+            var smessages = [{
+                "text": "Hello I'm in ECE!!!",
+                "author": {
+                    "name": "Gleb",
+                    "questId": "gabillig"
+                }
+            }, {
+                "text": "Hi",
+                "author": {
+                    "name": "Acer",
+                    "questId": "c327wang"
+                }
+            },{
+                "text": "Sup",
+                "author": {
+                    "name": "Zack",
+                    "questId": "zwaterfield"
+                }
+            }];
 
             var messages = [{
                 "text": "Hello I'm in ECE!!!",
@@ -30,13 +52,25 @@ angular.module('myApp.services', ['btford.socket-io'])
                 }
             }];
 
+            this.getSMessages = function() {
+                return smessages;
+            };
+
             this.getMessages = function() {
                 return messages;
             };
 
-            this.sendNewMessage = function(newMessage) {
-                mySocket.emit('message', newMessage);
+            this.sendNewMessage = function(newMessage, messageType) {
+                if (messageType == "general") {
+                    mySocket.emit('smessage', newMessage);
+                } else {
+                    mySocket.emit('message', newMessage);
+                }
             };
+
+            $rootScope.$on('socket:smessage', function(ev, data) {
+                smessages.push(data);
+            });
 
             $rootScope.$on('socket:message', function(ev, data) {
                 messages.push(data);
@@ -111,7 +145,7 @@ angular.module('myApp.services', ['btford.socket-io'])
 
             $rootScope.$on('socket:answer', function(ev, data) {
                 angular.forEach(questions, function(question) {
-                    if (question._id === data.questionId) {
+                    if (question.id === data.questionId) {
                         question.answers.push(data);
                     }
                 });

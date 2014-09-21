@@ -1,0 +1,76 @@
+.mainbox {
+/*	min-height: 400px;
+*/	border: solid;
+	border-width: 3px;
+	border-color: #E8E8E8;
+	padding: 14px 12px;
+	border-radius: 8px;
+	overflow-y: scroll;
+}
+
+.chatbox {
+
+}
+
+.qabox {
+	margin-bottom: 15px;
+}
+
+li {
+	list-style-type: none;
+}
+
+.btn {
+	margin: 0px 1px;
+}
+
+blockquote {
+	margin-bottom:4px !important;
+}
+
+.answer {
+	margin-left: 50px;
+}
+
+.last-item {
+	margin-bottom: 14px;
+}
+
+.input-row {
+	margin-top: 8px;
+}
+
+
+input[type=text] {
+	margin-right: 10px;
+}
+
+.width-15 {
+	width:15%;
+}
+
+.width-60 {
+	width:60% !important;
+}
+
+.width-70 {
+	width:70% !important;
+}
+
+.width-80 {
+	width:80% !important;
+}
+
+
+
+.bold {
+	font-weight: bold;
+}
+
+.selected-box {
+	border-color: #909090 !important;
+}
+
+h1 {
+	text-align: center;
+}

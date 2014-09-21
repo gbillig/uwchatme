@@ -10,6 +10,7 @@ angular.module('myApp', [
     'myApp.services',
     'myApp.controllers',
     'myApp.directives',
+    'ui.bootstrap'
     ])
     .config(function($routeProvider) {
         $routeProvider

@@ -1,19 +1,43 @@
 <h1>UW Chat Me</h1>
-
-<div>
-	<li ng-repeat="message in messages track by $index">{{message.author.name}}: {{message.text}}</li>
+<div style="padding: 2px">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+	<div class="mainbox qabox" ng-style="boxHeightStyle" ng-class="{'selected-box': chatType == 'question'}">
+		<div ng-repeat="question in questions track by $index">
+			<blockquote class="question">{{question.text}}</blockquote>
+			<li ng-repeat="answer in question.answers" class="answer" ng-class="{'last-item': $last}">
+				{{answer.author.name}}: {{answer.text}}
+			</li>
+			<div class="form-inline last-item">
+				<input type="text" ng-model="question.tempAnswer" class="width-80 form-control"></input>
+				<button ng-click="submitAnswer(question)" class="btn btn-success width-15">Answer</button>
+			</div>
+		</div>
+	</div>
 </div>
-<input type="text" ng-model="newMessage.text"></input>
-<button ng-click="sendNewMessage()">Chat</button>
-<button ng-click="sendQuestion()">Ask</button>
 
-<div ng-repeat="question in questions track by $index">
-	<span>{{question.author.name}}: {{question.text}}</span>
-	<br />
-	<li ng-repeat="answer in question.answers">
-		{{answer.author.name}}: {{answer.text}}
-	</li>
-	<input type="text" ng-model="question.tempAnswer"></input>
-	<button ng-click="submitAnswer(question)">Answer</button>
-	<br />
+
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+	<div class="mainbox chatbox" ng-style="boxHeightStyle" ng-class="{'selected-box': chatType == 'general'}">
+		<li ng-repeat="message in smessages track by $index" class="message">{{message.author.name}}: {{message.text}}</li>
+	</div>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+	<div class="mainbox chatbox" ng-style="boxHeightStyle" ng-class="{'selected-box': chatType == 'fun'}">
+		<li ng-repeat="message in messages track by $index" class="message">{{message.author.name}}: {{message.text}}</li>
+	</div>
+</div>
+
+<div class="input-row col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	<form ng-submit="sendText()" class="form-inline">
+		<input type="text" ng-model="newMessage.text" class="width-70 form-control"></input>
+		<!-- <button ng-click="sendNewMessage()" class="btn btn-primary width-10">Chat</button>
+		<button ng-click="sendQuestion()" class="btn btn-danger width-10">Ask</button> -->
+	    <div class="btn-group">
+	        <label class="btn btn-warning" ng-model="chatType" btn-radio="'question'" ng-class="{bold: chatType == 'question'}">Question</label>
+	        <label class="btn btn-primary" ng-model="chatType" btn-radio="'general'" ng-class="{bold: chatType == 'general'}">General</label>
+	        <label class="btn btn-danger" ng-model="chatType" btn-radio="'fun'" ng-class="{bold: chatType == 'fun'}">Fun</label>
+	    </div>
+	</form>
+</div>
 </div>

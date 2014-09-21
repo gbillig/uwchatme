@@ -1,11 +1,17 @@
 'use strict';
 
 angular.module('myApp.controllers').controller('HomeCtrl',
-    function($http, $scope, $location, messagesService, questionsService, userProfileService) {
+    function($http, $scope, $location, $log, messagesService, questionsService, userProfileService) {
 
         $scope.userProfile = userProfileService.getUserProfile();
+        $scope.smessages = messagesService.getSMessages();
         $scope.messages = messagesService.getMessages();
         $scope.questions = questionsService.getQuestions();
+        $scope.chatType = 'general';
+
+        $scope.boxHeightStyle = {
+            "height": (window.innerHeight-200)/2
+        };
 
         $scope.newMessage = {
             "text": "",
@@ -17,13 +23,21 @@ angular.module('myApp.controllers').controller('HomeCtrl',
             "author": $scope.userProfile,
         };
 
-        $scope.sendNewMessage = function() {
+        $scope.sendText = function() {
+            if ($scope.chatType == 'question') {
+                sendQuestion();
+            } else {
+                sendNewMessage();
+            }
+        };
+
+        var sendNewMessage = function() {
             $scope.newMessage.timestamp = Date.now();
-            messagesService.sendNewMessage(angular.copy($scope.newMessage));
+            messagesService.sendNewMessage(angular.copy($scope.newMessage), $scope.chatType);
             $scope.newMessage.text = "";
         };
 
-        $scope.sendQuestion = function() {
+        var sendQuestion = function() {
             $scope.newQuestion.text = $scope.newMessage.text;
             $scope.newQuestion.timestamp = Date.now();
             questionsService.sendNewQuestion(angular.copy($scope.newQuestion));
@@ -35,7 +49,7 @@ angular.module('myApp.controllers').controller('HomeCtrl',
                 "text": question.tempAnswer,
                 "author": $scope.userProfile,
                 "timestamp": Date.now(),
-                "questionId": question._id || 0
+                "questionId": question.id
             };
 
             questionsService.submitAnswer(angular.copy(answer));
