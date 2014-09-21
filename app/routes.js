@@ -52,7 +52,7 @@ module.exports = function(app) {
 						var publicInfo = req.body;
 						delete publicInfo.password;
 						res.writeHead(200, {"Content-Type": "text/plain"});
-						res.json(publicInfo));
+						res.json(publicInfo);
 					} else {
 						res.write(401, {"Content-Type": "text/plain"});
 						res.json( { message: "login failed"});

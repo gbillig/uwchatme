@@ -75,17 +75,20 @@ io.on('connection', function(socket){
 
 	socket.on('question', function(question){
 		console.log(question.text);
-		
-		var newquestion = {
+
+		roomModel.findOne({name: socket.rooms[1]}, 'question', function(err, result){
+			
+			var newquestion = {
 			text: question.text,
+			id: "question_" + result.question.length,
 			author: question.author,
 			answer: []
-		};
+			};
 
-		roomModel.findOneAndUpdate({name: socket.rooms[1]}, {$push: { question : newquestion }}, {}, function(err, room){
-			io.emit('question', question);
+			roomModel.findOneAndUpdate({name: socket.rooms[1]}, {$push: { question : newquestion }}, {}, function(err, room){
+				io.emit('question', question);
+			});
 		});
-
 	});
 
 
