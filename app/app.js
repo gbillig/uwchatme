@@ -65,7 +65,7 @@ io.on('connection', function(socket){
 			questId: message.author.questId
 		};
 		console.log(chat);
-		//query room, get room.history
+		//query room, get room.shistory
 		roomModel.findOneAndUpdate({name: socket.rooms[1]}, {$push: { shistory : chat }}, {upsert: true}, function(err, room){
 			console.log("The room: " + room);
 			io.emit('smessage', message)
@@ -80,7 +80,7 @@ io.on('connection', function(socket){
 
 			var newquestion = {
 			text: question.text,
-			id: "question_" + result.question.length,
+			id: result.question.length,
 			author: question.author,
 			answers: []
 			};
@@ -93,8 +93,14 @@ io.on('connection', function(socket){
 
 
 	socket.on('answer', function(answer){
-		console.log(answer);
-		io.emit('answer', answer);
+		roomModel.findOne({name: socket.rooms[1]}, 'question', function(err, result){
+			console.log(answer);
+			result.question[answer.questionId].answers.push(answer);
+			roomModel.findOneAndUpdate({name: socket.rooms[1]}, {question: result.question}, {}, function(err, room){
+				io.emit('answer', answer);
+				console.log(room);
+			});
+		});
 		
 	});
 });
