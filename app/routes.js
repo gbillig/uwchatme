@@ -22,7 +22,9 @@ module.exports = function(app) {
 					user.save(function(err){
 						if(!err){
 							console.log("user created");
-							res.json({ message: 'User Created' });
+							var publicInfo = req.body;
+							delete publicInfo.password;
+							res.json(publicInfo);
 						} else {
 							console.log("error: " + err);
 						}
