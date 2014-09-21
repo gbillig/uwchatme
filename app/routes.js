@@ -16,7 +16,8 @@ module.exports = function(app) {
 		userModel.findOne({ questId: req.body.questId}, 'questId', function(err, result){
 			console.log("result: " + result);
 			if(!err){
-				if (!result || result.questId != req.body.questId){
+				if (!result){
+					req.body.courses = [];
 					var user = new userModel(req.body);
 					user.save(function(err){
 						if(!err){
