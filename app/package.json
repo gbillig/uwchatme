@@ -11,6 +11,7 @@
     "morgan": "^1.0.0",
     "socket.io": "*",
     "request": "*",
-    "mongoose": "*"
+    "mongoose": "*",
+    "ical2json": "*"
   }
 }

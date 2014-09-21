@@ -11,7 +11,8 @@ module.exports = function(app) {
 	//create new user
 	app.post('/api/createUser', function(req, res){
 		console.log(req.body.questId);
-		
+		// require('./ical2course')(req.body.iCal, Date.now());
+
 		//Verify that account has not been already created
 		userModel.findOne({ questId: req.body.questId}, 'questId', function(err, result){
 			console.log("result: " + result);
@@ -32,6 +33,8 @@ module.exports = function(app) {
 				} else {
 					console.log("Bitch you already registered.");
 					res.json({ message: 'Bitch you already registered.' });
+					res.writeHead(400, {"Content-Type": "text/plain"});
+
 				}
 			} else {
 				console.log(err);

@@ -171,26 +171,21 @@ angular.module('myApp.services', ['btford.socket-io'])
                 return userProfile;
             };
 
-            this.createUser = function(newUserProfile) {
-                this.setUserProfile(newUserProfile);
-                $http.post('/api/createUser', userProfile).success(function(data) {
+            this.createUser = function(newUserProfile, iCal) {
+                // newUserProfile.iCal = iCal;
+                $http.post('/api/createUser', newUserProfile).success(function(data) {
+                    this.setUserProfile(data);
                     $location.path('/home');
                 });
-            };
+            }.bind(this);
 
-            this.login = function(userProfile) {
+            this.login = function(userProfile, ical) {
+                $log.debug(ical);
                 $http.post('/api/login', userProfile).success(function(data) {
+                    this.setUserProfile(data);
                     $location.path('/home');
                 });
-            };
-
-            this.userSignIn = function(profileJSON) {
-                $http.post('/api/createUser', profileJSON).success(function(data) {
-                    $cookieStore.put('userID', data.userId);
-                    userId = data.userId;
-                    $location.path('/menu');
-                });
-            };
+            }.bind(this);
         };
 
         return new UserProfileService();

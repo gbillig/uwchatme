@@ -74,3 +74,9 @@ input[type=text] {
 h1 {
 	text-align: center;
 }
+
+.link {
+     cursor:pointer;
+     color:blue;
+     text-decoration:underline;
+}
