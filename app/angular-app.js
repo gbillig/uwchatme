@@ -21,6 +21,10 @@ angular.module('myApp', [
             templateUrl: 'pages/signup.html',
             controller: 'SignupCtrl'
         })
+        .when('/login', {
+            templateUrl: 'pages/login.html',
+            controller: 'LoginCtrl'
+        })
         .otherwise({
             redirectTo: '/signup'
         });

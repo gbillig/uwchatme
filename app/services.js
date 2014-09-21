@@ -140,11 +140,15 @@ angular.module('myApp.services', ['btford.socket-io'])
             this.createUser = function(newUserProfile) {
                 this.setUserProfile(newUserProfile);
                 $http.post('/api/createUser', userProfile).success(function(data) {
-                    $log.debug(data);
                     $location.path('/home');
                 });
             };
 
+            this.login = function(userProfile) {
+                $http.post('/api/login', userProfile).success(function(data) {
+                    $location.path('/home');
+                });
+            };
 
             this.userSignIn = function(profileJSON) {
                 $http.post('/api/createUser', profileJSON).success(function(data) {
