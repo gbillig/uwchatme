@@ -21,9 +21,9 @@ angular.module('myApp.controllers').controller('SignupCtrl',
 
         $scope.register = function() {
             if ($scope.email.slice(-13).toLowerCase() == "@uwaterloo.ca") {
-                var rawIcal = window.atob($scope.icalFile.data.slice(13));
+                // var rawIcal = window.atob($scope.icalFile.data.slice(13));
                 $scope.userProfile.questId = $scope.email.slice(0, -13);
-                userProfileService.createUser($scope.userProfile, rawIcal);
+                userProfileService.createUser($scope.userProfile);
             } else {
                 $log.debug("Not a valid waterloo email!");
             }

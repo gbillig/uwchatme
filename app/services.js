@@ -171,7 +171,7 @@ angular.module('myApp.services', ['btford.socket-io'])
                 return userProfile;
             };
 
-            this.createUser = function(newUserProfile, iCal) {
+            this.createUser = function(newUserProfile) {
                 // newUserProfile.iCal = iCal;
                 $http.post('/api/createUser', newUserProfile).success(function(data) {
                     this.setUserProfile(data);
