@@ -10,6 +10,10 @@ angular.module('myApp.controllers').controller('LoginCtrl',
             "password": ""
         };
 
+        $scope.goToSignup = function() {
+            $location.path('/signup');
+        };
+
         $scope.login = function() {
             if ($scope.email.slice(-13).toLowerCase() == "@uwaterloo.ca") {
                 $scope.userProfile.questId = $scope.email.slice(0, -13);
