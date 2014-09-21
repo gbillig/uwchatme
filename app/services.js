@@ -177,15 +177,14 @@ angular.module('myApp.services', ['btford.socket-io'])
                     setUserProfile(data);
                     $location.path('/home');
                 });
-            });
+            };
 
             this.login = function(userProfile, ical) {
-                $log.debug(ical);
                 $http.post('/api/login', userProfile).success(function(data) {
                     setUserProfile(data);
                     $location.path('/home');
                 });
-            });
+            };
         };
 
         return new UserProfileService();
