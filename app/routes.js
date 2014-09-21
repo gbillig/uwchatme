@@ -31,7 +31,6 @@ module.exports = function(app) {
 					});
 				} else {
 					console.log("Bitch you already registered.");
-					res.writeHead(400, {"Content-Type": "text/plain"});
 					res.json({ message: 'Bitch you already registered.' });
 				}
 			} else {
