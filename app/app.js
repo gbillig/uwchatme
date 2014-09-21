@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 
 //Binding port number
-var port = process.env.PORT || 9999;
+var port = process.env.PORT || 80;
 console.log("Port: " + port);
 http.listen(port, function(){
   console.log('listening on: ' + port);
