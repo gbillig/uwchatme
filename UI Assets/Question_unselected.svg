@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64px"
+   height="64px"
+   id="svg3791"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="Question_unselected.svg">
+  <defs
+     id="defs3793">
+    <filter
+       id="filter4363"
+       inkscape:label="Inner Shadow"
+       inkscape:menu="Shadows and Glows"
+       inkscape:menu-tooltip="Adds a colorizable drop shadow inside"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur4365"
+         stdDeviation="4"
+         result="result8" />
+      <feOffset
+         id="feOffset4367"
+         dx="4"
+         dy="4"
+         result="result11" />
+      <feComposite
+         id="feComposite4369"
+         in2="result11"
+         result="result6"
+         in="SourceGraphic"
+         operator="in" />
+      <feFlood
+         id="feFlood4371"
+         result="result10"
+         in="result6"
+         flood-opacity="1"
+         flood-color="rgb(0,0,0)" />
+      <feBlend
+         id="feBlend4373"
+         in2="result10"
+         mode="normal"
+         in="result6"
+         result="result12" />
+      <feComposite
+         id="feComposite4375"
+         in2="SourceGraphic"
+         result="result2"
+         operator="in" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="7.7781746"
+     inkscape:cx="37.44756"
+     inkscape:cy="48.186203"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:document-units="px"
+     inkscape:grid-bbox="true"
+     inkscape:window-width="1366"
+     inkscape:window-height="716"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata3796">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer">
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3799"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#f9f9f9;fill-opacity:1;stroke:#cccccc;font-family:Arial Rounded MT Bold;-inkscape-font-specification:Arial Rounded MT Bold;stroke-opacity:1;stroke-width:0.04875876000000000;stroke-miterlimit:4;stroke-dasharray:none"
+       transform="matrix(2.0509135,0,0,2.0509135,8.387031,-7.9578198)"><flowRegion
+         id="flowRegion3801"><rect
+           id="rect3803"
+           width="63.81818"
+           height="64.545456"
+           x="0.18181819"
+           y="-0.18181819"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#f9f9f9;font-family:Arial Rounded MT Bold;-inkscape-font-specification:Arial Rounded MT Bold;stroke:#cccccc;stroke-opacity:1;stroke-width:0.04875876000000000;stroke-miterlimit:4;stroke-dasharray:none;fill-opacity:1" /></flowRegion><flowPara
+         id="flowPara3805">?</flowPara></flowRoot>  </g>
+</svg>
