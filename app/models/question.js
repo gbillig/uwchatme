@@ -4,7 +4,7 @@ var QuestionSchema = new mongoose.Schema({
 	text: String,
 	author: mongoose.Schema.Types.Mixed,
 	timestamp: {type: Date, default: Date.now},
-	answer: {type: Array, default: []}
+	answers: {type: Array, default: []}
 });
 
 module.export = questionModel = mongoose.model('Question', QuestionSchema);

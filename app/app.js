@@ -31,8 +31,10 @@ io.on('connection', function(socket){
 
 	console.log("Connection is made: " + socket.id);
 
+	//socket user check
+
 	socket.on('message', function(message){
-		console.log(message.text);
+		console.log(message.text);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
 		io.emit('message', message);
 		
 		var chat = new chatModel({
@@ -56,16 +58,13 @@ io.on('connection', function(socket){
 		var question = new questionModel({
 			text: question.text,
 			author: question.author
-
 		});
 
 		question.save(function(err, savedQ){
 			if(!err) {
 				console.log("Question Saved");
-				console.log(savedQ);
 				question.id = savedQ.id;
-				question.answer = [];
-				console.log(JSON.stringify(question));
+				question.answers = [];
 				io.emit('question', question);
 			} else {
 				console.log("question saving error: " + err);
@@ -74,13 +73,9 @@ io.on('connection', function(socket){
 	});
 
 	socket.on('answer', function(answer){
-		console.log(answer.text);
+		console.log(answer);
 		io.emit('answer', answer);
-		
-		//questionModel.findbyID(answer.questionId).exec(function(err, question){
-			
-		//});
-
-
+		//questionModel.findByID(answer.questionId, function(err, ));
 	});
+
 });
