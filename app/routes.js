@@ -46,7 +46,7 @@ module.exports = function(app) {
 	});
 
 	//login API
-	app.post('api/login', function(req, res){
+	app.post('/api/login', function(req, res){
 		userModel.findOne({ questId: req.body.questId}, function(err, result){
 			if(!err){
 				if (!result){
