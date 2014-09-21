@@ -26,50 +26,66 @@ app.use('/', express.static(__dirname));
 require('./routes')(app);
 require('./models/chat');
 require('./models/question');
+require('./models/room');
 
 io.on('connection', function(socket){
 
 	console.log("Connection is made: " + socket.id);
 
 	//socket user check
+	socket.join("ECE240 LEC 1");
 
 	socket.on('message', function(message){
-		console.log(message.text);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
-		io.emit('message', message);
-		
-		var chat = new chatModel({
+		//chat comes in
+		console.log(message.text);
+		console.log(socket.rooms);
+		//create chat history object
+		var chat = {
 			content: message.text,
 			author: message.author.name,
 			questId: message.author.questId
+		};
+		console.log(chat);
+		//query room, get room.history
+		roomModel.findOneAndUpdate({name: socket.rooms[1]}, {$push: { history : chat }}, {}, function(err, room){
+			console.log("The room: " + room);
+			io.emit('smessage', message);
 		});
 
-		chat.save(function(err){
-			if(!err)
-				console.log("Chat Saved");
-			else
-				console.log("chat saving error: " + err);
+	});
+
+	socket.on('smessage', function(message){
+		//chat comes in
+		console.log(message.text);
+		console.log(socket.rooms);
+		//create chat history object
+		var chat = {
+			content: message.text,
+			author: message.author.name,
+			questId: message.author.questId
+		};
+		console.log(chat);
+		//query room, get room.history
+		roomModel.findOneAndUpdate({name: socket.rooms[1]}, {$push: { shistory : chat }}, {upsert: true}, function(err, room){
+			console.log("The room: " + room);
+			io.emit('smessage', message)
 		});
+
 	});
 
 	socket.on('question', function(question){
 		console.log(question.text);
 		
-
-		var question = new questionModel({
+		var newquestion = {
 			text: question.text,
-			author: question.author
+			author: question.author,
+			answer: []
+		};
+
+		roomModel.findOneAndUpdate({name: socket.rooms[1]}, {$push: { question : newquestion }}, {}, function(err, room){
+			io.emit('question', question);
 		});
 
-		question.save(function(err, savedQ){
-			if(!err) {
-				console.log("Question Saved");
-				question.id = savedQ.id;
-				question.answers = [];
-				io.emit('question', question);
-			} else {
-				console.log("question saving error: " + err);
-			}
-		});
 	});
 
 	socket.on('answer', function(answer){
@@ -77,5 +93,4 @@ io.on('connection', function(socket){
 		io.emit('answer', answer);
 		//questionModel.findByID(answer.questionId, function(err, ));
 	});
-
 });

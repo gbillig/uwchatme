@@ -30,7 +30,7 @@ module.exports = function(app) {
 				} else {
 					console.log("Bitch you already registered.");
 					res.writeHead(400, {"Content-Type": "text/plain"});
-					res.end("Bitch you already registered.");
+					res.json({ message: 'Bitch you already registered.' });
 				}
 			} else {
 				console.log(err);
@@ -42,6 +42,24 @@ module.exports = function(app) {
 	});
 
 	//login API
+	app.post('api/login', function(req, res){
+		userModel.findOne({ questId: req.body.questId}, questId, function(err, result){
+			if(!err){
+				if (!result){
+					if (req.body.questId == result.questId){
+						//Check if one has class
+						//Wait for Gleb
+						res.writeHead(200, {"Content-Type": "text/plain"});
+						res.json({ message: "sucess"});
+					} else {
+						res.write(401, {"Content-Type": "text/plain"});
+						res.json( { message: "login failed"});
+					}				
+				}
+			}
+
+		});
+	});
 
 	//QnA API for searching archive only
 

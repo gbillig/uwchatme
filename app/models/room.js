@@ -1,9 +1,11 @@
 var mongoose = require('mongoose');
 
 var RoomSchema = new mongoose.Schema({
-	question: mongoose.Schema.Types.Mixed,
-	history: mongoose.Schema.Types.Mixed,
-	time: mongoose.Schema.Types.Mixed
+	name: String,
+	question: {type: mongoose.Schema.Types.Mixed, default: []},
+	history: {type: mongoose.Schema.Types.Mixed, default: []},
+	shistory: {type: mongoose.Schema.Types.Mixed, default: []},
+	time: {type: mongoose.Schema.Types.Mixed, default: []}
 });
 
 module.export = roomModel = mongoose.model("Room", RoomSchema);
